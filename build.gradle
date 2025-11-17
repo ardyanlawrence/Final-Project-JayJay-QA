@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.ardyan'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'io.cucumber:cucumber-junit:7.30.0'
+    testImplementation 'io.cucumber:cucumber-java:7.30.0'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.38.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:6.3.2'
+    testImplementation 'org.testng:testng:7.11.0'
+    testImplementation 'org.json:json:20250517'
+    testImplementation 'io.rest-assured:json-schema-validator:5.5.6'
+    testImplementation 'io.rest-assured:rest-assured:5.5.6'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+test {
+    useJUnit()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
