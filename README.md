@@ -17,9 +17,4 @@ This project covers automated test scenarios for the following core features of 
 | Delete non exist user             | Negative | Validate API return error when deleting non exist user                     |
 
 
-### 🏷️ Tag API
-| Test Case            | Type     | Description            |
-|----------------------|----------|------------------------|
-| Get list of all tags | Positive | Validates GET Tag List |
-
 Each test cases for API Automation Test is written using **Gherkin** and executed with **TestNG**
