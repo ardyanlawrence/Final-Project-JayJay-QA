@@ -21,32 +21,27 @@ Feature: API Automation Test
 
   @create-user @positive
   Scenario: Create New User
-    When send POST request for create user with "Ardyan" and last name "Lawrence" and random email
+    When send POST request for create user with "Ardyan" and last name "Lawrence" and email "random"
     Then validate status code is 200
     And validate response with json schema "single_user.json"
 
   @create-user @negative
   Scenario: Create New User (Incomplete Data)
-    When send POST request for create user with "Lionel" and last name "Messi" and blank email
+    When send POST request for create user with "Lionel" and last name "Messi" and email "blank"
     Then validate status code is 400 or 404
     Then validate response body contain error message "BODY_NOT_VALID"
 
   @delete-user @positive
-  Scenario: Delete User
-    Given prepare URL for delete user
-    And provide user id from list
-    When send DELETE request
+  Scenario: Create & Delete User
+    When send POST request for create user with "Cristiano" and last name "Ronaldo" and email "random"
     Then validate status code is 200
-    Then validation response body delete user
+    And store the created user id from response
+    Then send DELETE request with id "stored_id"
+    Then validate status code is 200
+    Then validation response body contain deleted id "stored_id"
 
   @delete-user @negative
   Scenario: Delete Non Exist User
-    Given prepare URL for delete user
-    And provide user id from list
-    When send DELETE request
+    When send DELETE request with id "asdfghjkl"
     Then validate status code is 400 or 404
-    Then response body berisi pesan error "PARAMS_NOT_VALID"
-
-
-
-
+    Then validate response body contain error message "PARAMS_NOT_VALID"

@@ -34,8 +34,19 @@ public class ApiModel {
 
     public static Response createUser(String firstName, String lastName, String email) {
         setHeader();
-        String bodyJson = "";
+        String bodyJson = String.format("""
+                {
+                    "firstName": "%s",
+                    "lastName": "%s",
+                    "email": "%s"
+                }
+                """, firstName, lastName, email);
         return req.body(bodyJson).post(baseUrl + "/user/create");
+    }
+
+    public static Response deleteUser(String id) {
+        setHeader();
+        return req.delete(baseUrl + "/user/" + id);
     }
 
     public static void validationStatusCode(Response res, int status_code) {
@@ -53,5 +64,9 @@ public class ApiModel {
 
     public static void validateErrorMessage(Response res, String errorMessage) {
         assertThat(res.jsonPath().getString("error").contains(errorMessage));
+    }
+
+    public static void validateDeletedId(Response res, String id) {
+        assertThat(res.jsonPath().getString("id").contains(id));
     }
 }
