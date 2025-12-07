@@ -6,14 +6,27 @@ import io.cucumber.java.Scenario;
 import org.ardyan.BaseTest;
 
 public class CucumberHook extends BaseTest {
-    @Before("@api")
+    private static final ThreadLocal<Scenario> currentScenario = new ThreadLocal<>();
+
+    @Before
     public void beforeTest(Scenario scenario) {
+        currentScenario.set(scenario);
         System.out.println("Starting Scenario: " + scenario.getName());
-        getDriver();
+        if (scenario.getSourceTagNames().contains("@web")) {
+            getDriver();
+        }
     }
 
-    @After("@api")
+    @After
     public void afterTest(Scenario scenario) {
         System.out.println("Scenario " + scenario.getName() + " finished.");
+        if (scenario.getSourceTagNames().contains("@web")) {
+            driver.close();
+        }
+        currentScenario.remove();
+    }
+
+    public static Scenario getCurrentScenario() {
+        return currentScenario.get();
     }
 }
