@@ -1,16 +1,13 @@
 package org.ardyan.stepdef.web;
 
 import io.cucumber.java.Scenario;
-import org.ardyan.page.Contact;
+import org.ardyan.page.*;
 import org.ardyan.stepdef.CucumberHook;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.ardyan.BaseTest;
-import org.ardyan.page.Home;
-import org.ardyan.page.Login;
-import org.ardyan.page.Register;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,12 +18,16 @@ public class WebStepDef extends BaseTest {
     protected Register registerPage;
     protected Login loginPage;
     protected Contact contactPage;
+    protected About aboutPage;
+    protected Cart cartPage;
 
     public WebStepDef() {
         this.homePage = new Home(driver, wait);
         this.registerPage = new Register(driver, wait);
         this.loginPage = new Login(driver, wait);
         this.contactPage = new Contact(driver, wait);
+        this.aboutPage = new About(driver, wait);
+        this.cartPage = new Cart(driver, wait);
     }
 
     @Given("user is in homepage")
@@ -50,7 +51,7 @@ public class WebStepDef extends BaseTest {
         Scenario currentScenario = CucumberHook.getCurrentScenario();
         if (currentScenario.getSourceTagNames().contains("@register")) {
             registerPage.inputUsername(username);
-        } else {
+        } else if (currentScenario.getSourceTagNames().contains("@login")) {
             loginPage.inputUsername(username);
         }
     }
@@ -60,7 +61,7 @@ public class WebStepDef extends BaseTest {
         Scenario currentScenario = CucumberHook.getCurrentScenario();
         if (currentScenario.getSourceTagNames().contains("@register")) {
             registerPage.inputPassword(password);
-        } else {
+        } else if (currentScenario.getSourceTagNames().contains("@login")) {
             loginPage.inputPassword(password);
         }
     }
@@ -149,16 +150,56 @@ public class WebStepDef extends BaseTest {
 
     @When("user click close button")
     public void userClickCloseButton() {
-        contactPage.clickCloseButton();
+        Scenario currentScenario = CucumberHook.getCurrentScenario();
+        if (currentScenario.getSourceTagNames().contains("@contact")) {
+            contactPage.clickCloseButton();
+        } else if (currentScenario.getSourceTagNames().contains("@aboutus")) {
+            aboutPage.clickCloseButton();
+        }
     }
 
     @When("user click X button")
     public void userClickXButton() {
-        contactPage.clickXButton();
+        Scenario currentScenario = CucumberHook.getCurrentScenario();
+        if (currentScenario.getSourceTagNames().contains("@contact")) {
+            contactPage.clickXButton();
+        } else if (currentScenario.getSourceTagNames().contains("@aboutus")) {
+            aboutPage.clickXButton();
+        }
     }
 
     @Then("verify contact pop-up is not displayed")
     public void verifyContactPopUpIsNotDisplayed() {
         contactPage.verifyContactModalNotDisplayed();
+    }
+
+    @Then("user click menu about us")
+    public void userClickMenuAboutUs() {
+        homePage.clickAboutUsButton();
+    }
+
+    @And("verify about us pop-up is displayed")
+    public void verifyAboutUsPopUpIsDisplayed() {
+        aboutPage.validateAboutModalDisplayed();
+    }
+
+    @Then("verify about us pop-up is not displayed")
+    public void verifyAboutUsPopUpIsNotDisplayed() {
+        aboutPage.validateAboutModalNotDisplayed();
+    }
+
+    @When("user click button play video")
+    public void userClickButtonPlayVideo() {
+        aboutPage.clickPlayButton();
+    }
+
+    @Then("verify the video is played")
+    public void verifyTheVideoIsPlayed() {
+        aboutPage.validateVideoPlayed();
+    }
+
+    @And("user click menu cart")
+    public void userClickMenuCart() {
+        homePage.clickCartButton();
     }
 }

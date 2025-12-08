@@ -21,7 +21,7 @@ public class CucumberHook extends BaseTest {
     public void afterTest(Scenario scenario) {
         System.out.println("Scenario " + scenario.getName() + " finished.");
         if (scenario.getSourceTagNames().contains("@web")) {
-            driver.close();
+            driver.quit();
         }
         currentScenario.remove();
     }

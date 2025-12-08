@@ -14,6 +14,8 @@ public class Home {
     By signUpButton = By.xpath("//*[@id=\"signin2\"]");
     By loginButton = By.xpath("//*[@id=\"login2\"]");
     By contactButton = By.xpath("//*[@id=\"navbarExample\"]/ul/li[2]/a");
+    By aboutButton = By.xpath("//*[@id=\"navbarExample\"]/ul/li[3]/a");
+    By cartButton = By.xpath("//*[@id=\"cartur\"]");
 
     public Home(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -32,9 +34,18 @@ public class Home {
         driver.findElement(loginButton).click();
     }
 
-    public void clickContactButton(){
+    public void clickContactButton() {
         driver.findElement(contactButton).click();
     }
+
+    public void clickAboutUsButton() {
+        driver.findElement(aboutButton).click();
+    }
+
+    public void clickCartButton() {
+        driver.findElement(cartButton).click();
+    }
+
     public void validateLoggedOut() {
         wait.until(ExpectedConditions.presenceOfElementLocated(loginButton));
         driver.findElement(loginButton).isDisplayed();

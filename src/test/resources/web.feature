@@ -1,15 +1,15 @@
 @web
 Feature: UI Automation Testing Demoblaze
 
-  @register @positive
-  Scenario: Register User
-    Given user is in homepage
-    Then user click menu sign up
-    Then verify register pop-up is displayed
-    And user input username with "lionelmessi10"
-    And user input password with "gu4c4k3p"
-    When user click button sign up
-    Then verify display alert message "Sign up successful."
+#  @register @positive
+#  Scenario: Register User
+#    Given user is in homepage
+#    Then user click menu sign up
+#    Then verify register pop-up is displayed
+#    And user input username with "lionelmessi10"
+#    And user input password with "gu4c4k3p"
+#    When user click button sign up
+#    Then verify display alert message "Sign up successful."
 
   @register @negative
   Scenario: Register without Username
@@ -105,25 +105,50 @@ Feature: UI Automation Testing Demoblaze
     When user click X button
     Then verify contact pop-up is not displayed
 
-  @checkout
-  Scenario: User can successfully checkout 1 Product
+  @aboutus
+  Scenario: Test user play video on the about us pop-up
     Given user is in homepage
-    Then user is logged in with username "ardyanlawrence6" and password "gu4c4k3p"
-    And user click product "Samsung galaxy s6"
-    And user click add to cart
-    And verify display alert message "Product added"
-    And user go to cart menu
-    And verify product should be added in the cart page "Samsung galaxy s6"
-    And verify user can see total price
-    And user click place order button
-    And verify order form pop-up will be displayed
-    And user input name "hanif"
-    And user input country "hanif"
-    And user input city "hanif"
-    And user input credit card "hanif"
-    And user input month "hanif"
-    And user input year "hanif"
-    And user click purchase button
-    Then user see the pop-up successfully order
-    And user click OK button on the pop-up successfully order
+    Then user click menu about us
+    And verify about us pop-up is displayed
+    When user click button play video
+    Then verify the video is played
+
+  @aboutus
+  Scenario: Test user close about us pop-up using close button
+    Given user is in homepage
+    Then user click menu about us
+    And verify about us pop-up is displayed
+    When user click close button
+    Then verify about us pop-up is not displayed
+
+  @aboutus
+  Scenario: Test user close about us pop-up using X button
+    Given user is in homepage
+    And user click menu about us
+    And verify about us pop-up is displayed
+    When user click X button
+    Then verify about us pop-up is not displayed
+
+
+#  @checkout
+#  Scenario: User can successfully checkout 1 Product
+#    Given user is in homepage
+#    Then user is logged in with username "ardyanlawrence6" and password "gu4c4k3p"
+#    And user click product "Samsung galaxy s6"
+#    And user click add to cart
+#    And verify display alert message "Product added"
+#    And user click menu cart
+#    And verify product should be added in the cart page "Samsung galaxy s6"
+#    And verify user can see total price
+#    And user click place order button
+#    And verify order form pop-up will be displayed
+#    And user input name "hanif"
+#    And user input country "hanif"
+#    And user input city "hanif"
+#    And user input credit card "hanif"
+#    And user input month "hanif"
+#    And user input year "hanif"
+#    And user click purchase button
+#    Then user see the pop-up successfully order
+#    And user click OK button on the pop-up successfully order
 

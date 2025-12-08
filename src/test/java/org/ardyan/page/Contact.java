@@ -47,14 +47,17 @@ public class Contact {
     }
 
     public void clickCloseButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeButton));
         driver.findElement(closeButton).click();
     }
 
     public void clickXButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xButton));
         driver.findElement(xButton).click();
     }
 
     public void verifyContactModalNotDisplayed() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(contactModal));
         assertFalse(driver.findElement(contactModal).isDisplayed());
     }
 }

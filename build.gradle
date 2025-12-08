@@ -18,12 +18,8 @@ dependencies {
     testImplementation 'io.github.bonigarcia:webdrivermanager:6.3.2'
     testImplementation 'org.testng:testng:7.11.0'
     testImplementation 'org.json:json:20250517'
-    testImplementation 'io.rest-assured:json-schema-validator:5.5.6'
-    testImplementation 'io.rest-assured:rest-assured:5.5.6'
-}
-
-test {
-    useJUnitPlatform()
+    testImplementation 'io.rest-assured:json-schema-validator:5.5.0'
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
 }
 
 test {
@@ -34,4 +30,43 @@ configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
+}
+
+def optionalTag = project.hasProperty('tags') ? project.getProperty('tags') : ''
+def finalApiTag = optionalTag ? "(@api) and (${optionalTag})" : "@api"
+tasks.register('api', JavaExec) {
+    group = 'verification'
+    description = 'Run API tests with optional tag filter'
+    dependsOn 'testClasses'
+
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass.set('io.cucumber.core.cli.Main')
+
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:reports/api_reports.html',
+            '--plugin', 'json:reports/api_reports.json',
+            '--glue', 'org.ardyan.stepdef',
+            '--tags', finalApiTag,
+            'src/test/resources'
+    ]
+}
+
+def finalWebTag = optionalTag ? "(@web) and (${optionalTag})" : "@web"
+tasks.register('web', JavaExec) {
+    group = 'verification'
+    description = 'Run API tests with optional tag filter'
+    dependsOn 'testClasses'
+
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass.set('io.cucumber.core.cli.Main')
+
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:reports/web_reports.html',
+            '--plugin', 'json:reports/web_reports.json',
+            '--glue', 'org.ardyan.stepdef',
+            '--tags', finalWebTag,
+            'src/test/resources'
+    ]
 }
