@@ -1,6 +1,9 @@
 package org.ardyan.page;
 
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,8 +13,7 @@ public class Home {
     WebDriverWait wait;
     By signUpButton = By.xpath("//*[@id=\"signin2\"]");
     By loginButton = By.xpath("//*[@id=\"login2\"]");
-    By logoutButton = By.xpath("//*[@id=\"logout2\"]");
-
+    By contactButton = By.xpath("//*[@id=\"navbarExample\"]/ul/li[2]/a");
 
     public Home(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -30,9 +32,24 @@ public class Home {
         driver.findElement(loginButton).click();
     }
 
-
+    public void clickContactButton(){
+        driver.findElement(contactButton).click();
+    }
     public void validateLoggedOut() {
         wait.until(ExpectedConditions.presenceOfElementLocated(loginButton));
         driver.findElement(loginButton).isDisplayed();
+    }
+
+    public void validateErrorMessage(String message) {
+        try {
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            assert alert != null;
+            Assert.assertEquals(alert.getText(), message);
+            alert.accept();
+        } catch (NoAlertPresentException e) {
+            Assert.fail("Alert Not Showing");
+        } catch (Exception e) {
+            Assert.fail("Failed alert verification: " + e.getMessage());
+        }
     }
 }

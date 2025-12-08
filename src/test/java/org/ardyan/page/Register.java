@@ -40,17 +40,4 @@ public class Register {
     public void clickSignUpButton() {
         driver.findElement(signUpButton).click();
     }
-
-    public void validateErrorMessage(String message) {
-        try {
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            assert alert != null;
-            Assert.assertEquals(alert.getText(), message);
-            alert.accept();
-        } catch (NoAlertPresentException e) {
-            Assert.fail("Alert Not Showing");
-        } catch (Exception e) {
-            Assert.fail("Failed alert verification: " + e.getMessage());
-        }
-    }
 }

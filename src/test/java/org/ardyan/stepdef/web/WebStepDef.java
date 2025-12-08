@@ -1,6 +1,7 @@
 package org.ardyan.stepdef.web;
 
 import io.cucumber.java.Scenario;
+import org.ardyan.page.Contact;
 import org.ardyan.stepdef.CucumberHook;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -19,11 +20,13 @@ public class WebStepDef extends BaseTest {
     protected Home homePage;
     protected Register registerPage;
     protected Login loginPage;
+    protected Contact contactPage;
 
     public WebStepDef() {
         this.homePage = new Home(driver, wait);
         this.registerPage = new Register(driver, wait);
         this.loginPage = new Login(driver, wait);
+        this.contactPage = new Contact(driver, wait);
     }
 
     @Given("user is in homepage")
@@ -69,7 +72,7 @@ public class WebStepDef extends BaseTest {
 
     @Then("verify display alert message {string}")
     public void verifyDisplayAlertMessage(String alertMessage) {
-        registerPage.validateErrorMessage(alertMessage);
+        homePage.validateErrorMessage(alertMessage);
     }
 
     @Then("user click menu login")
@@ -112,5 +115,50 @@ public class WebStepDef extends BaseTest {
     @Then("verify user logged out")
     public void verifyUserLoggedOut() {
         homePage.validateLoggedOut();
+    }
+
+    @Then("user click menu contact us")
+    public void userClickMenuContactUs() {
+        homePage.clickContactButton();
+    }
+
+    @Then("verify contact pop-up is displayed")
+    public void verifyContactPopUpIsDisplayed() {
+        contactPage.validateContactModalDisplayed();
+    }
+
+    @And("user input email with {string}")
+    public void userInputEmailWith(String email) {
+        contactPage.inputContactEmail(email);
+    }
+
+    @And("user input name with {string}")
+    public void userInputNameWith(String name) {
+        contactPage.inputContactName(name);
+    }
+
+    @And("user input message {string}")
+    public void userInputMessage(String message) {
+        contactPage.inputMessage(message);
+    }
+
+    @When("user click send message button")
+    public void userClickSendMessageButton() {
+        contactPage.clickSendMessageButton();
+    }
+
+    @When("user click close button")
+    public void userClickCloseButton() {
+        contactPage.clickCloseButton();
+    }
+
+    @When("user click X button")
+    public void userClickXButton() {
+        contactPage.clickXButton();
+    }
+
+    @Then("verify contact pop-up is not displayed")
+    public void verifyContactPopUpIsNotDisplayed() {
+        contactPage.verifyContactModalNotDisplayed();
     }
 }
