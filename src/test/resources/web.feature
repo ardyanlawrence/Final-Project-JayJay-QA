@@ -6,7 +6,7 @@ Feature: UI Automation Testing Demoblaze
     Given user is in homepage
     Then user click menu sign up
     Then verify register pop-up is displayed
-    And user input username with "lionelmessi10"
+    And user input username with "cristianoronaldo7"
     And user input password with "gu4c4k3p"
     When user click button sign up
     Then verify display alert message "Sign up successful."
