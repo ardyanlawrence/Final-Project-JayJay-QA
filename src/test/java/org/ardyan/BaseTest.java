@@ -21,7 +21,6 @@ public class BaseTest {
         prefs.put("credentials_enable_service", false); // Disables "Offer to save passwords"
         prefs.put("profile.password_manager_enabled", false); // Disables the password manager itself
         prefs.put("profile.password_manager_leak_detection", false); // Disables password leak detection warnings
-
         options.setExperimentalOption("prefs", prefs);
         options.addArguments("--headless");
         WebDriverManager.chromedriver().setup();
