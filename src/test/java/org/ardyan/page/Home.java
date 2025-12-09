@@ -17,6 +17,10 @@ public class Home {
     By aboutButton = By.xpath("//*[@id=\"navbarExample\"]/ul/li[3]/a");
     By cartButton = By.xpath("//*[@id=\"cartur\"]");
 
+    By title_item_displayed(String titleName) {
+        return By.xpath("//h4[@class='card-title']/a[normalize-space()='" + titleName + "']");
+    }
+
     public Home(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
@@ -44,6 +48,12 @@ public class Home {
 
     public void clickCartButton() {
         driver.findElement(cartButton).click();
+    }
+
+    public void clickProduct(String productName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(title_item_displayed(productName)));
+        wait.until(ExpectedConditions.elementToBeClickable(title_item_displayed(productName)));
+        driver.findElement(title_item_displayed(productName)).click();
     }
 
     public void validateLoggedOut() {

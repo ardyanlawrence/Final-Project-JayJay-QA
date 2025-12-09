@@ -1,15 +1,15 @@
 @web
 Feature: UI Automation Testing Demoblaze
 
-#  @register @positive
-#  Scenario: Register User
-#    Given user is in homepage
-#    Then user click menu sign up
-#    Then verify register pop-up is displayed
-#    And user input username with "lionelmessi10"
-#    And user input password with "gu4c4k3p"
-#    When user click button sign up
-#    Then verify display alert message "Sign up successful."
+  @register @positive
+  Scenario: Register User
+    Given user is in homepage
+    Then user click menu sign up
+    Then verify register pop-up is displayed
+    And user input username with "lionelmessi10"
+    And user input password with "gu4c4k3p"
+    When user click button sign up
+    Then verify display alert message "Sign up successful."
 
   @register @negative
   Scenario: Register without Username
@@ -130,25 +130,25 @@ Feature: UI Automation Testing Demoblaze
     Then verify about us pop-up is not displayed
 
 
-#  @checkout
-#  Scenario: User can successfully checkout 1 Product
-#    Given user is in homepage
-#    Then user is logged in with username "ardyanlawrence6" and password "gu4c4k3p"
-#    And user click product "Samsung galaxy s6"
-#    And user click add to cart
-#    And verify display alert message "Product added"
-#    And user click menu cart
-#    And verify product should be added in the cart page "Samsung galaxy s6"
-#    And verify user can see total price
-#    And user click place order button
-#    And verify order form pop-up will be displayed
-#    And user input name "hanif"
-#    And user input country "hanif"
-#    And user input city "hanif"
-#    And user input credit card "hanif"
-#    And user input month "hanif"
-#    And user input year "hanif"
-#    And user click purchase button
-#    Then user see the pop-up successfully order
-#    And user click OK button on the pop-up successfully order
-
+  @checkout
+  Scenario: User can successfully checkout 1 Product
+    Given user is in homepage
+    Then user is logged in with username "ardyanlawrence6" and password "gu4c4k3p"
+    And verify homepage with welcome user message
+    And user click product "Nokia lumia 1520"
+    And user click add to cart
+    And verify display alert message "Product added."
+    And user click menu cart
+    And verify product "Nokia lumia 1520" is in the cart
+    And verify user can see total price
+    And user click place order button
+    And verify order form pop-up is displayed
+    And user input name "Ardyan"
+    And user input country "Indonesia"
+    And user input city "Denpasar"
+    And user input credit card "1111 2222 3333 4444"
+    And user input month "12"
+    And user input year "30"
+    And user click purchase button
+    Then user see the pop-up successfully order
+    And user click OK button on the pop-up successfully order

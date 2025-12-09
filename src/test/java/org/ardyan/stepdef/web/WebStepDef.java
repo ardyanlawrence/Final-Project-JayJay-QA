@@ -20,6 +20,7 @@ public class WebStepDef extends BaseTest {
     protected Contact contactPage;
     protected About aboutPage;
     protected Cart cartPage;
+    protected Product productPage;
 
     public WebStepDef() {
         this.homePage = new Home(driver, wait);
@@ -28,6 +29,7 @@ public class WebStepDef extends BaseTest {
         this.contactPage = new Contact(driver, wait);
         this.aboutPage = new About(driver, wait);
         this.cartPage = new Cart(driver, wait);
+        this.productPage = new Product(driver, wait);
     }
 
     @Given("user is in homepage")
@@ -201,5 +203,83 @@ public class WebStepDef extends BaseTest {
     @And("user click menu cart")
     public void userClickMenuCart() {
         homePage.clickCartButton();
+    }
+
+    @And("user click product {string}")
+    public void userClickProduct(String product) throws InterruptedException {
+        Thread.sleep(2000);
+        homePage.clickProduct(product);
+    }
+
+    @And("user click add to cart")
+    public void userClickAddToCart() {
+        productPage.clickAddToCartButton();
+    }
+
+    @And("verify product {string} is in the cart")
+    public void verifyProductIsInTheCart(String product) throws InterruptedException {
+        Thread.sleep(2000);
+        cartPage.verifyProductAddedToCart(product);
+    }
+
+    @And("verify user can see total price")
+    public void verifyUserCanSeeTotalPrice() {
+        cartPage.verifyTotalPriceDisplay();
+    }
+
+    @And("user click place order button")
+    public void userClickPlaceOrderButton() {
+        cartPage.clickPlaceOrderButton();
+    }
+
+
+    @And("verify order form pop-up is displayed")
+    public void verifyOrderFormPopUpIsDisplayed() {
+        cartPage.verifyOrderModalDisplayed();
+    }
+
+    @And("user input name {string}")
+    public void userInputName(String name) {
+        cartPage.inputName(name);
+    }
+
+    @And("user input country {string}")
+    public void userInputCountry(String country) {
+        cartPage.inputCountry(country);
+    }
+
+    @And("user input city {string}")
+    public void userInputCity(String city) {
+        cartPage.inputCity(city);
+    }
+
+    @And("user input credit card {string}")
+    public void userInputCreditCard(String card) {
+        cartPage.inputCreditCard(card);
+    }
+
+    @And("user input month {string}")
+    public void userInputMonth(String month) {
+        cartPage.inputMonth(month);
+    }
+
+    @And("user input year {string}")
+    public void userInputYear(String year) {
+        cartPage.inputYear(year);
+    }
+
+    @And("user click purchase button")
+    public void userClickPurchaseButton() {
+        cartPage.clickPurchaseButton();
+    }
+
+    @Then("user see the pop-up successfully order")
+    public void userSeeThePopUpSuccessfullyOrder() {
+        cartPage.verifyOrderSuccessModalDisplayed();
+    }
+
+    @And("user click OK button on the pop-up successfully order")
+    public void userClickOKButtonOnThePopUpSuccessfullyOrder() {
+        cartPage.clickOkSuccessButton();
     }
 }
