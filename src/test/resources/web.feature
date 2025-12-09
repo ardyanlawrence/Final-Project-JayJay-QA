@@ -106,7 +106,7 @@ Feature: UI Automation Testing Demoblaze
     Then verify contact pop-up is not displayed
 
   @aboutus
-  Scenario: Test user play video on the about us pop-up
+  Scenario: User can play video on the about us pop-up
     Given user is in homepage
     Then user click menu about us
     And verify about us pop-up is displayed
@@ -114,7 +114,7 @@ Feature: UI Automation Testing Demoblaze
     Then verify the video is played
 
   @aboutus
-  Scenario: Test user close about us pop-up using close button
+  Scenario: User can close about us pop-up using close button
     Given user is in homepage
     Then user click menu about us
     And verify about us pop-up is displayed
@@ -122,7 +122,7 @@ Feature: UI Automation Testing Demoblaze
     Then verify about us pop-up is not displayed
 
   @aboutus
-  Scenario: Test user close about us pop-up using X button
+  Scenario: User can close about us pop-up using X button
     Given user is in homepage
     And user click menu about us
     And verify about us pop-up is displayed
