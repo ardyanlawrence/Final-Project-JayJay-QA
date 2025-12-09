@@ -127,6 +127,11 @@ gradle build
 ```bash
 ./gradlew api
 ```
+
+### Reports
+API Reports [API Reports](https://ardyanlawrence.github.io/Final-Project-JayJay-QA/api_reports.html)
+
+WEB Reports [WEB Reports](https://ardyanlawrence.github.io/Final-Project-JayJay-QA/web_reports.html)
 ## Acknowledgments
 This project was developed as Final Project of the QA Engineer Online Course by JayJay.  
 Thanks to the creators of demoblaze.com and dummyapi.io for providing the demo site.
