@@ -22,7 +22,6 @@ public class BaseTest {
         prefs.put("profile.password_manager_enabled", false); // Disables the password manager itself
         prefs.put("profile.password_manager_leak_detection", false); // Disables password leak detection warnings
 
-        // Set the preferences in ChromeOptions
         options.setExperimentalOption("prefs", prefs);
         options.addArguments("--headless");
         WebDriverManager.chromedriver().setup();
